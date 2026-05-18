@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple AI Chatbot</title>
+    <style>
+        /* Base Page Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Main Chat Window Box */
+        .chat-container {
+            background-color: #ffffff;
+            width: 380px;
+            height: 480px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Header blue bar */
+        .chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Chat Screening Body Area */
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            background-color: #f8fafc;
+            overflow-y: auto; /* Lamba chat hone par scroll automatic hoga */
+        }
+
+        /* Basic Message Bubble UI styling */
+        .msg {
+            margin-bottom: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            max-width: 80%;
+            clear: both; /* Bubbles ko aapas mein overlap hone se rokega */
+        }
+
+        /* Bot Message Box (Left Side Grey) */
+        .bot-message {
+            background-color: #e2e8f0;
+            color: #333333;
+            float: left;
+        }
+
+        /* User Message Box (Right Side Blue) */
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            float: right;
+        }
+
+        /* Bottom Controls Layout panel */
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e2e8f0;
+            background-color: white;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .btn-send {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0 15px;
+            margin-left: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-send:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CHAT INTERFACE WRAPPER ELEMENT -->
+    <div class="chat-container">
+        <div class="chat-header">Nexus Assistant Bot</div>
+        
+        <!-- Messages displays stream holder -->
+        <div class="chat-body" id="chatArea">
+            <!-- Welcome message element static template -->
+            <div class="msg bot-message">Hello! I am a smart bot. Type 'hello', 'price', or 'contact' to talk to me!</div>
+        </div>
+
+        <!-- Inputs text area entry controller panel -->
+        <div class="chat-footer">
+            <input type="text" id="userInput" class="chat-input" placeholder="Type a message here...">
+            <button class="btn-send" onclick="startChatLogic()">Send</button>
+        </div>
+    </div>
+
+    <!-- EASY LOGICAL JAVASCRIPT BLOCK -->
+    <script>
+        function startChatLogic() {
+            // 1. User ne jo input likha hai usko pakda
+            var inputElement = document.getElementById("userInput");
+            var userText = inputElement.value;
+
+            // Agar user ne khali box mein bina kuch likhe click kiya toh code rok do
+            if (userText === "") {
+                return;
+            }
+
+            var chatArea = document.getElementById("chatArea");
+
+            // 2. User ka bubble screen par display karo
+            chatArea.innerHTML = chatArea.innerHTML + "<div class='msg user-message'>" + userText + "</div>";
+            
+            // Text box ko turant clear karo taaki naya message type ho sake
+            inputElement.value = "";
+
+            // 3. ABSOLUTE SIMPLE IF-ELSE BLOCK RESPOND LOGIC
+            var botResponse = "";
+            
+            // User ke message ko lowercase (chote aksharon) mein badal diya taaki check karna aasan ho
+            var cleanText = userText.toLowerCase();
+
+            if (cleanText === "hello" || cleanText === "hi") {
+                botResponse = "Hello user! Hope you are doing absolutely great today. 😊";
+            } 
+            else if (cleanText === "price" || cleanText === "cost") {
+                botResponse = "Our premium web design services start from just $499.";
+            } 
+            else if (cleanText === "contact" || cleanText === "email") {
+                botResponse = "You can contact our support line at help@nexusbot.com.";
+            } 
+            else {
+                // Agar user ne upar ke keywords ke alawa kuch aur random type kiya toh ye chalega:
+                botResponse = "I cannot understand that completely. Please try typing 'hello', 'price', or 'contact'.";
+            }
+
+            // 4. Bot ka custom response reply card structure mein screen par chipkao
+            chatArea.innerHTML = chatArea.innerHTML + "<div class='msg bot-message'>" + botResponse + "</div>";
+
+            // Chat section ko scroll karke automatic bottom par lekar jao
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>
