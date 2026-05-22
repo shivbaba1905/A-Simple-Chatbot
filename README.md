@@ -5,8 +5,7 @@ A clean, distraction-free conversational user interface designed for smooth mess
 ---
 
 ## 🚀 Live Links
-*   🌐 **[Live Interactive Demo](PASTE_YOUR_LIVE_LINK_HERE)**
-*   🎨 **[Figma Design File](PASTE_YOUR_FIGMA_LINK_HERE)**
+*https://github.com/shivbaba1905/A-Simple-Chatbot/tree/main*
 
 ---
 
